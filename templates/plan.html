@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Estate Layout</title>
+    <style>
+        :root {
+            --primary-color: #000;
+            --bg-color: #f7f7f7;
+            --text-color: #111;
+            --btn-bg: #000;
+            --btn-text: #fff;
+            --border: #e0e0e0;
+            --transition: 0.3s ease;
+            --shadow-light: 0 6px 12px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Helvetica Neue', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            color: var(--primary-color);
+        }
+
+        h1::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: var(--transition);
+        }
+
+        .section:hover h1::after {
+            width: 65px;
+        }
+
+        .section {
+            padding: 80px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .planning-container {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            justify-content: center;
+            gap: 40px;
+            padding-bottom: 20px;
+            scroll-snap-type: x mandatory;
+        }
+
+        .info.card,
+        .image-box {
+            flex: 0 0 auto;
+            scroll-snap-align: center;
+            min-width: 300px;
+        }
+
+        .info.card {
+            background: #fff;
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            max-width: 350px;
+        }
+
+        .info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .details-icons p {
+            margin: 8px 0;
+            font-size: 1rem;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 6px;
+            border: none;
+            border-radius: 999px;
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        button:hover {
+            background: var(--btn-bg);
+            color: var(--btn-text);
+        }
+
+        button.primary {
+            background: var(--btn-bg);
+            color: var(--btn-text);
+        }
+
+        .image-box {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-box img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .image-box img:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .floor-details {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        .carousel-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .carousel {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .carousel img {
+            width: 100%;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel img:hover {
+            transform: scale(1.03);
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Popup full-screen */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .popup img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .popup:target {
+            display: flex;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .planning-container {
+                gap: 20px;
+            }
+
+            .info.card,
+            .image-box {
+                min-width: 280px;
+            }
+
+            .carousel-controls button {
+                font-size: 1rem;
+                padding: 8px 12px;
+            }
+        }
+
+        .bottom-navbar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            box-shadow: var(--shadow-light);
+            padding: 10px 20px;
+            display: flex;
+            gap: 15px;
+            z-index: 999;
+            align-items: center;
+        }
+
+        @media (max-width: 480px) {
+            .bottom-navbar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+                border-radius: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Property Planning Section -->
+    <section class="section">
+        <h1>PROPERTY<br>PLANNING</h1>
+        <div class="planning-container">
+            <div class="info card">
+                <h2>Unit 1R</h2>
+                <p><strong>Area:</strong> 546.27 sqft</p>
+                <p><strong>Price:</strong> $1,020,400</p>
+                <div class="details-icons">
+                    <p>🛏️ 1 Bed</p>
+                    <p>🛁 1 Bath</p>
+                    <p>📐 Type: 1BD, Type A, W.B</p>
+                </div>
+                <div class="buttons">
+                    <button>PDF</button>
+                    <button>COMPARE</button>
+                    <button>ON 3D</button>
+                    <button class="primary">CALL BACK</button>
+                </div>
+            </div>
+
+            <div class="image-box">
+                <img src="../static/assets/floor-plan.png" alt="Floor Plan" onclick="openPopup(this.src)">
+                <div class="floor-details">
+                    <p><strong>1st Floor</strong></p>
+                    <p>Total area: 546.27 sqft</p>
+                    <p>Living area: 491.13 sqft</p>
+                </div>
+            </div>
+
+            <div class="info card">
+                <h2>Interior Highlights</h2>
+                <p>High ceilings</p>
+                <p>Smart lighting</p>
+                <p>Luxury wood flooring</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Room Tour Section -->
+    <section class="section">
+        <h1>ROOM<br>TOUR</h1>
+        <div class="carousel-wrapper">
+            <div class="carousel" id="roomCarousel">
+                <img src="../static/assets/floor-plan.png" alt="Room 1" onclick="openPopup(this.src)">
+            </div>
+            <div class="carousel-controls">
+                <button onclick="prevImage('room')">Previous</button>
+                <button onclick="nextImage('room')">Next</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floor Plan Section -->
+    <section class="section">
+        <h1>FLOOR<br>PLAN</h1>
+        <div class="image-box">
+            <img src="../static/assets/floor-plan.png" alt="Full Floor Plan" onclick="openPopup(this.src)">
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section">
+        <h1>GALLERY</h1>
+        <div class="carousel-wrapper">
+            <div class="carousel" id="galleryCarousel">
+                <img src="../static/assets/floor-plan.png" alt="Gallery 1" onclick="openPopup(this.src)">
+            </div>
+            <div class="carousel-controls">
+                <button onclick="prevImage('gallery')">Previous</button>
+                <button onclick="nextImage('gallery')">Next</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popup -->
+    <div id="popup" class="popup" onclick="closePopup()">
+        <span class="popup-close">&times;</span>
+        <img id="popup-img" src="" alt="Popup">
+    </div>
+
+    <!-- Bottom Navbar -->
+    <div class="bottom-navbar">
+        <button class="primary" onclick="alert('Request a callback')">CALL BACK</button>
+        <button onclick="alert('Downloading PDF')">PDF DOWNLOAD</button>
+        <button onclick="history.back()">GO BACK</button>
+    </div>
+
+    <!-- Script -->
+    <script>
+        const roomImages = [
+            "../static/assets/floor-plan.png",
+            "../static/assets/floor-plan2.png",
+            "../static/assets/floor-plan3.png"
+        ];
+
+        const galleryImages = [
+            "../static/assets/floor-plan.png",
+            "../static/assets/floor-plan2.png",
+            "../static/assets/floor-plan3.png"
+        ];
+
+        let roomIndex = 0;
+        let galleryIndex = 0;
+
+        function updateCarousel(type) {
+            const imgSrc = type === 'room' ? roomImages[roomIndex] : galleryImages[galleryIndex];
+            const carouselId = type === 'room' ? 'roomCarousel' : 'galleryCarousel';
+            document.getElementById(carouselId).innerHTML = `<img src="${imgSrc}" alt="${type}" onclick="openPopup(this.src)">`;
+        }
+
+        function nextImage(type) {
+            if (type === 'room') {
+                roomIndex = (roomIndex + 1) % roomImages.length;
+            } else {
+                galleryIndex = (galleryIndex + 1) % galleryImages.length;
+            }
+            updateCarousel(type);
+        }
+
+        function prevImage(type) {
+            if (type === 'room') {
+                roomIndex = (roomIndex - 1 + roomImages.length) % roomImages.length;
+            } else {
+                galleryIndex = (galleryIndex - 1 + galleryImages.length) % galleryImages.length;
+            }
+            updateCarousel(type);
+        }
+
+        function openPopup(src) {
+            document.getElementById("popup-img").src = src;
+            document.getElementById("popup").style.display = "flex";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        // Initialize carousels
+        updateCarousel('room');
+        updateCarousel('gallery');
+    </script>
+</body>
+
+</html>

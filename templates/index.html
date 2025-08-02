@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KROZ Estate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KROZ Estate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="unity-container">
+        <div class="unity-canvas-container">
+            <nav class="navbar">
+                <div class="navbar-container">
+                    <a href="#" class="navbar-logo">KROZ <i class="fas fa-home"></i></a>
+                    <div class="navbar-links">
+                        <a href="#location" class="navbar-link">Location <i class="fas fa-map-marker-alt"></i></a>
+                        <a href="/plan" class="navbar-link">Plan <i class="fas fa-draw-polygon"></i></a>
+                        <a href="#technology" class="navbar-link">Technology <i class="fas fa-cogs"></i></a>
+                        <a href="#contact" class="navbar-link">Contact <i class="fas fa-envelope"></i></a>
+                        <a href="#projects" class="navbar-link">Projects <i class="fas fa-building"></i></a>
+                    </div>
+                    <button class="navbar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <button class="dark-mode-toggle" id="darkModeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <canvas id="unity-canvas"></canvas>
+            <div class="model-overlay-text">
+                <h1>KROZ <i class="fas fa-landmark"></i></h1>
+                <h2>Housing Estate</h2>
+                <p>Select your house <i class="fas fa-hand-pointer"></i></p>
+            </div>
+        </div>
+
+        <div id="unity-loading-bar">
+            <div id="unity-progress-bar-empty">
+                <div id="unity-progress-bar-full"></div>
+            </div>
+        </div>
+
+        <section id="location" class="content-section">
+            <div class="section-container">
+                <h2 class="section-title">Location <i class="fas fa-map-marked-alt"></i></h2>
+                <div class="location-split">
+                    <div class="location-info">
+                        <div class="location-grid">
+                            <div class="location-group">
+                                <h3>Wintering Road <i class="fas fa-road"></i></h3>
+                                <ul>
+                                    <li>3 km</li>
+                                    <li>0.5 km</li>
+                                    <li>0.4 km</li>
+                                </ul>
+                            </div>
+                            <div class="location-group">
+                                <h3>Purpose of Drive <i class="fas fa-car"></i></h3>
+                                <ul>
+                                    <li>1.5 km</li>
+                                    <li>0.5 km</li>
+                                    <li>0.4 km</li>
+                                </ul>
+                            </div>
+                            <div class="location-group">
+                                <h3>Sport Drive & Park <i class="fas fa-tree"></i></h3>
+                                <ul>
+                                    <li>0.5 km</li>
+                                    <li>0.4 km</li>
+                                </ul>
+                            </div>
+                            <div class="location-group">
+                                <h3>Driveway Drive <i class="fas fa-sign"></i></h3>
+                                <ul>
+                                    <li>0.5 km</li>
+                                    <li>0.4 km</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="location-map">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509373!2d144.95373531531698!3d-37.81721397975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf0109e4e0f8f2f7a!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1632868457379!5m2!1sen!2sus"
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="technology" class="content-section">
+            <div class="section-container">
+                <h2 class="section-title">Construction Technology <i class="fas fa-tools"></i></h2>
+                <div class="technology-grid">
+                    <div class="technology-group">
+                        <h3>Walk <i class="fas fa-walking"></i></h3>
+                        <ul>
+                            <li>Healthcare research road</li>
+                        </ul>
+                    </div>
+                    <div class="technology-group">
+                        <h3>Build <i class="fas fa-hammer"></i></h3>
+                        <ul>
+                            <li>Water project</li>
+                        </ul>
+                    </div>
+                    <div class="technology-group">
+                        <h3>Workers <i class="fas fa-users"></i></h3>
+                        <ul>
+                            <li>Retail, 'free' postal, energy-efficient access</li>
+                        </ul>
+                    </div>
+                    <div class="technology-group">
+                        <h3>Harding <i class="fas fa-shield-alt"></i></h3>
+                        <ul>
+                            <li>Gas collection</li>
+                        </ul>
+                    </div>
+                    <div class="technology-group">
+                        <h3>Heat recovery <i class="fas fa-thermometer-half"></i></h3>
+                        <ul>
+                            <li>Heat recovery in wireless system</li>
+                        </ul>
+                    </div>
+                    <div class="technology-group">
+                        <h3>Installation <i class="fas fa-plug"></i></h3>
+                        <ul>
+                            <li>Water-saving, easy access to air conditioning, stop-ups</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section">
+            <div class="section-container">
+                <h2 class="section-title">Let's talk <i class="fas fa-comments"></i></h2>
+                <div class="contact-split">
+                    <div class="contact-form">
+                        <form action="#" method="post">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
+                            <textarea name="message" placeholder="Your Message" required></textarea>
+                            <button type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-group">
+                            <h3>Home <i class="fas fa-home"></i></h3>
+                            <ul>
+                                <li>Email <i class="fas fa-envelope"></i></li>
+                                <li>www.KROZ.com <i class="fas fa-globe"></i></li>
+                                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi laborum corrupti nam
+                                    ut officia mollitia, commodi hic illum dolore blanditiis magni dignissimos! Aliquid
+                                    in dolorum alias exercitationem soluta, quam pariatur? <i class="fas fa-globe"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="content-section">
+            <div class="section-container">
+                <h2 class="section-title">Other projects of the developer <i class="fas fa-building"></i></h2>
+                <div class="projects-content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <ul>
+                        <li>Ut enim ad minim veniam <i class="fas fa-check"></i></li>
+                        <li>Ut enim ad minim veniam <i class="fas fa-check"></i></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <div class="footer-content">
+                <p>&copy; 2025 KROZ Estate. All rights reserved. <i class="fas fa-copyright"></i></p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+<script>
+    var buildUrl = "/static/UnityBuild";
+    var loaderUrl = buildUrl + "/Web2.loader.js";
+    var config = {
+        dataUrl: buildUrl + "/Web2.data.br",
+        frameworkUrl: buildUrl + "/Web2.framework.js.br",
+        codeUrl: buildUrl + "/Web2.wasm.br",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "YourCompany",
+        productName: "YourProduct",
+        productVersion: "1.0",
+    };
+
+    var canvas = document.querySelector("#unity-canvas");
+    var loadingBar = document.querySelector("#unity-loading-bar");
+    var progressBarFull = document.querySelector("#unity-progress-bar-full");
+    var warningBanner = document.querySelector("#unity-warning");
+
+    loadingBar.style.display = "block";
+
+    function onProgress(progress) {
+        progressBarFull.style.width = 100 * progress + "%";
+    }
+
+    function onComplete() {
+        loadingBar.style.display = "none";
+    }
+
+    function onError(message) {
+        warningBanner.style.display = "block";
+        warningBanner.textContent = "Error: " + message;
+        console.error(message);
+    }
+
+    function loadUnity() {
+        var script = document.createElement("script");
+        script.src = loaderUrl;
+
+        script.onload = () => {
+            createUnityInstance(canvas, config, onProgress)
+                .then(onComplete)
+                .catch((error) => {
+                    console.log("Trying uncompressed files...");
+                    config.dataUrl = buildUrl + "/Web2.data";
+                    config.frameworkUrl = buildUrl + "/Web2.framework.js";
+                    config.codeUrl = buildUrl + "/Web2.wasm";
+
+                    createUnityInstance(canvas, config, onProgress)
+                        .then(onComplete)
+                        .catch(onError);
+                });
+        };
+
+        script.onerror = () => onError("Failed to load Unity loader script");
+        document.body.appendChild(script);
+    }
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const icon = darkModeToggle.querySelector('i');
+        if (document.body.classList.contains('dark-mode')) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        } else {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
+    });
+
+    document.querySelector('.navbar-toggle').addEventListener('click', function () {
+        document.querySelector('.navbar-links').classList.toggle('active');
+        this.classList.toggle('active');
+    });
+
+    //loadUnity();
+</script>
+
+</html>
