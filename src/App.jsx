@@ -19,6 +19,7 @@ function App() {
               path="/"
               element={
                 <>
+                  
                   <VideoPlayer />
                   <Location />
                   <Technology />
