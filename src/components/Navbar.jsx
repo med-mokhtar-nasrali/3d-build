@@ -1,65 +1,59 @@
-import React, { useState, useEffect } from "react";
-import {
-    FaHome,
-    FaMapMarkerAlt,
-    FaDrawPolygon,
-    FaCogs,
-    FaEnvelope,
-    FaBuilding,
-    FaBars,
-} from "react-icons/fa";
+import React from "react";
+import { FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 
-export default function Navbar() {
-    const [scrolled, setScrolled] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 30);
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
+export default function Navbar({ playVideo }) {
     return (
-        <nav
-            className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-lg shadow-md transition-colors duration-500 ${scrolled
-                ? "bg-black/90"
-                : "bg-black/30"
-                }`}
-        >
-            <div className="max-w-7xl mx-auto px-6 sm:px-10 flex justify-between items-center h-20">
-                <a
-                    href="/"
-                    className="text-white text-xl font-semibold tracking-widest uppercase hover:text-gray-200 transition duration-300 flex items-center gap-2"
-                >
-                    KROZ <FaHome />
-                </a>
+        <div className="fixed top-4 left-4 right-4 z-50 flex justify-between items-center pointer-events-none">
 
-                <div className="hidden md:flex gap-8 items-center">
+            {/* LEFT SECTION */}
+            <div className="flex items-center gap-3 bg-white/80 backdrop-blur-lg shadow-md border border-gray-200 rounded-lg px-3 py-2 pointer-events-auto">
+                <a href="/" className="font-bold text-lg text-black tracking-tight">Eagle Vision</a>
+                <div className="flex items-center gap-2 text-sm text-gray-700">
                     {[
-                        { href: "#location", label: "Location", icon: FaMapMarkerAlt },
-                        { href: "/plan", label: "Plan", icon: FaDrawPolygon },
-                        { href: "#technology", label: "Technology", icon: FaCogs },
-                        { href: "#contact", label: "Contact", icon: FaEnvelope },
-                        { href: "#projects", label: "Projects", icon: FaBuilding },
-                    ].map(({ href, label, icon: Icon }) => (
-                        <a
-                            key={label}
-                            href={href}
-                            className="group relative text-white text-sm font-medium uppercase tracking-wider transition duration-300 hover:text-gray-200 flex items-center gap-1"
-                        >
-                            {label} <Icon className="inline" />
-                            <span className="absolute left-0 -bottom-1 h-[1px] w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
-                        </a>
+                        { label: "Master Plan", path: "/" },
+                        { label: "Apartment", path: "/" },
+                        { label: "Floor plan", path: "/plan" },
+                    ].map((item, index, arr) => (
+                        <React.Fragment key={item.label}>
+                            <a
+                                href={item.path}
+                                onClick={item.label === "Apartment" ? (e) => {
+                                    e.preventDefault();
+                                    playVideo("https://res.cloudinary.com/dzbmwlwra/video/upload/v1754833809/LateTransition_qmwchy.mp4", 4, false);
+                                } : undefined}
+                                className={`px-3 py-1 rounded-lg text-sm font-medium transition ${index === 0
+                                    ? "bg-black text-white shadow"
+                                    : "bg-gray-100 hover:bg-gray-200"
+                                    }`}
+                            >
+                                {item.label}
+                            </a>
+                            {index < arr.length - 1 && <span className="text-gray-400">›</span>}
+                        </React.Fragment>
                     ))}
                 </div>
-
-                <div className="flex items-center gap-4 md:hidden">
-                    <button className="text-white text-2xl hover:text-gray-200 transition duration-300">
-                        <FaBars />
-                    </button>
-                </div>
             </div>
-        </nav>
+
+            {/* RIGHT SECTION */}
+            <div className="flex items-center gap-2 bg-white/80 backdrop-blur-lg shadow-md border border-gray-200 rounded-lg px-3 py-2 pointer-events-auto">
+                {/* WhatsApp Call Me */}
+                <a
+                    href="https://wa.me/21612345678"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-lg text-sm text-gray-700 font-medium transition"
+                >
+                    <FaPhone /> Call me
+                </a>
+
+                {/* Location Scroll */}
+                <a
+                    href="#location"
+                    className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-lg text-sm text-gray-700 font-medium transition"
+                >
+                    <FaMapMarkerAlt /> Location
+                </a>
+            </div>
+        </div>
     );
 }

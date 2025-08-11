@@ -12,7 +12,7 @@ export default function Footer() {
                         KROZ Estate
                     </h2>
                     <p className="text-sm mt-2">
-                        &copy; {new Date().getFullYear()} KROZ Estate. All rights reserved.
+                        &copy; {new Date().getFullYear()} Eagle vision Estate. All rights reserved.
                     </p>
                 </div>
 

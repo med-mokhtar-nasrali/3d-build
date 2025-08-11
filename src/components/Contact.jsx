@@ -107,7 +107,7 @@ export default function Contact() {
                             {[
                                 {
                                     icon: <Mail className="w-6 h-6 text-indigo-600" />,
-                                    content: <a href="mailto:example@example.com" className="hover:underline">example@example.com</a>,
+                                    content: <a href="mailto:example@example.com" className="hover:underline">Eaglevision@gmail.com</a>,
                                 },
                                 {
                                     icon: <Phone className="w-6 h-6 text-indigo-600" />,
@@ -117,7 +117,7 @@ export default function Contact() {
                                     icon: <Globe className="w-6 h-6 text-indigo-600" />,
                                     content: (
                                         <a
-                                            href="https://www.example.com"
+                                            href="https://www.Eaglevision.com"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="hover:underline"
