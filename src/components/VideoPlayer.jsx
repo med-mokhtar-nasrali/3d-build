@@ -117,35 +117,39 @@ export default function FullscreenVideoPlayer() {
 
                 {current === 4 && svgContent && (
                     <>
-                        <div className="absolute inset-0 group pointer-events-none overflow-hidden">
+                        {/* Remove pointer-events-none here so clicks are detected */}
+                        <div className="absolute inset-0 group overflow-hidden">
                             <style>{`
-                .plan svg { width:100%; height:100%; display:block; }
-                .plan svg * {
-                  fill: transparent !important;
-                  stroke: transparent !important;
-                  transition: fill .2s ease, stroke .2s ease;
-                  vector-effect: non-scaling-stroke;
-                }
-                .group:hover .plan svg * {
-                  fill: rgba(34, 197, 94, 0.30) !important;
-                  stroke: #ffffff !important;
-                  stroke-width: 2 !important;
-                }
-                .plan svg rect[fill="#fff"], .plan svg rect[fill="#ffffff"] {
-                  fill: transparent !important; stroke: transparent !important;
-                }
-                .plan svg image, .plan svg mask { display:none !important; }
-              `}</style>
-                            <div
-                                className="plan absolute inset-0 pointer-events-auto"
-                                dangerouslySetInnerHTML={{ __html: svgContent }}
-                            />
+                                .plan svg { width:100%; height:100%; display:block; }
+                                .plan svg * {
+                                  fill: transparent !important;
+                                  stroke: transparent !important;
+                                  transition: fill .2s ease, stroke .2s ease;
+                                  vector-effect: non-scaling-stroke;
+                                }
+                                .group:hover .plan svg * {
+                                  fill: rgba(34, 197, 94, 0.30) !important;
+                                  stroke: #ffffff !important;
+                                  stroke-width: 2 !important;
+                                }
+                                .plan svg rect[fill="#fff"], .plan svg rect[fill="#ffffff"] {
+                                  fill: transparent !important; stroke: transparent !important;
+                                }
+                                .plan svg image, .plan svg mask { display:none !important; }
+                            `}</style>
+
+                            <a href="/plan" className="absolute inset-0 block">
+                                <div
+                                    className="plan absolute inset-0 pointer-events-auto cursor-pointer"
+                                    dangerouslySetInnerHTML={{ __html: svgContent }}
+                                />
+                            </a>
                         </div>
 
                         {/* Left side details menu with fade-in */}
                         <div
                             className="absolute left-10 z-30 max-w-sm p-8 rounded-2xl text-white shadow-xl
-             opacity-0 animate-fadeIn animate-fill-forwards"
+                 opacity-0 animate-fadeIn animate-fill-forwards"
                             style={{
                                 minWidth: "320px",
                                 top: "80px",
@@ -160,26 +164,25 @@ export default function FullscreenVideoPlayer() {
                             <p className="mb-3 text-lg leading-relaxed">💰 <strong>Price:</strong> Contact for info</p>
                         </div>
 
-
                         <style>{`
-              @keyframes fadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
-              }
-              .animate-fadeIn {
-                animation-name: fadeIn;
-                animation-duration: 0.8s;
-                animation-timing-function: ease-in-out;
-              }
-              .animate-fill-forwards {
-                animation-fill-mode: forwards;
-              }
-            `}</style>
+                          @keyframes fadeIn {
+                            from { opacity: 0; }
+                            to { opacity: 1; }
+                          }
+                          .animate-fadeIn {
+                            animation-name: fadeIn;
+                            animation-duration: 0.8s;
+                            animation-timing-function: ease-in-out;
+                          }
+                          .animate-fill-forwards {
+                            animation-fill-mode: forwards;
+                          }
+                        `}</style>
                     </>
                 )}
             </div>
 
-            {/* Controls */}
+            {/* Controls unchanged */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-4">
                 <button
                     onClick={handleReversePrev}

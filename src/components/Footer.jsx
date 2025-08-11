@@ -9,10 +9,10 @@ export default function Footer() {
                 {/* Left: Brand & Copyright */}
                 <div>
                     <h2 className="text-white text-lg font-semibold tracking-wide">
-                        KROZ Estate
+                        Eagle Vision Estate
                     </h2>
                     <p className="text-sm mt-2">
-                        &copy; {new Date().getFullYear()} Eagle vision Estate. All rights reserved.
+                        &copy; {new Date().getFullYear()} Eagle Vision Estate. All rights reserved.
                     </p>
                 </div>
 
