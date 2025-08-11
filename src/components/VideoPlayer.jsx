@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "./Navbar";
 
+import { Link } from 'react-router-dom';
+
 const videos = [
     { src: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754772189/1_v1zsfc.mp4", reverse: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754772170/RecorderClip_Reverse1_mduytz.mp4", title: "House 38A" },
     { src: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754772183/2_pnvwp9.mp4", reverse: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754771812/RecorderClip_Reverse3_vvupud.mp4", title: "House 38B" },
@@ -119,31 +121,48 @@ export default function FullscreenVideoPlayer() {
                     <>
                         {/* Remove pointer-events-none here so clicks are detected */}
                         <div className="absolute inset-0 group overflow-hidden">
-                            <style>{`
-                                .plan svg { width:100%; height:100%; display:block; }
-                                .plan svg * {
-                                  fill: transparent !important;
-                                  stroke: transparent !important;
-                                  transition: fill .2s ease, stroke .2s ease;
-                                  vector-effect: non-scaling-stroke;
-                                }
-                                .group:hover .plan svg * {
-                                  fill: rgba(34, 197, 94, 0.30) !important;
-                                  stroke: #ffffff !important;
-                                  stroke-width: 2 !important;
-                                }
-                                .plan svg rect[fill="#fff"], .plan svg rect[fill="#ffffff"] {
-                                  fill: transparent !important; stroke: transparent !important;
-                                }
-                                .plan svg image, .plan svg mask { display:none !important; }
-                            `}</style>
 
-                            <a href="/plan" className="absolute inset-0 block">
+<style>{`
+  .plan svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .plan svg * {
+    fill: transparent !important;
+    stroke: transparent !important;
+    transition: fill 0.2s ease, stroke 0.2s ease;
+    vector-effect: non-scaling-stroke;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  .plan svg *:hover {
+    fill: rgba(34, 197, 94, 0.30) !important;
+    stroke: #ffffff !important;
+    stroke-width: 2 !important;
+  }
+
+  .plan svg rect[fill="#fff"],
+  .plan svg rect[fill="#ffffff"] {
+    fill: transparent !important;
+    stroke: transparent !important;
+    pointer-events: none;
+  }
+
+  .plan svg image,
+  .plan svg mask {
+    display: none !important;
+  }
+`}</style>
+
+                            <Link to="/plan" className="absolute inset-0 block">
                                 <div
                                     className="plan absolute inset-0 pointer-events-auto cursor-pointer"
                                     dangerouslySetInnerHTML={{ __html: svgContent }}
                                 />
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Left side details menu with fade-in */}

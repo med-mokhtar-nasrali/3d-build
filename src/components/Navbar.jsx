@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 export default function Navbar({ playVideo }) {
     const [active, setActive] = useState("Master Plan");
@@ -27,8 +28,8 @@ export default function Navbar({ playVideo }) {
                 <div className="flex items-center gap-2 text-sm text-gray-700">
                     {navItems.map((item, index) => (
                         <React.Fragment key={item.label}>
-                            <a
-                                href={item.path}
+                            <Link
+                                to={item.path}
                                 onClick={(e) => handleClick(item, e)}
                                 className={`px-3 py-1 rounded-lg text-sm font-medium transition ${active === item.label
                                         ? "bg-black text-white shadow"
@@ -36,7 +37,7 @@ export default function Navbar({ playVideo }) {
                                     }`}
                             >
                                 {item.label}
-                            </a>
+                            </Link>
                             {index < navItems.length - 1 && <span className="text-gray-400">›</span>}
                         </React.Fragment>
                     ))}
