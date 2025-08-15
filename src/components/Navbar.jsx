@@ -31,8 +31,8 @@ export default function Navbar({ playVideo }) {
                                 href={item.path}
                                 onClick={(e) => handleClick(item, e)}
                                 className={`px-3 py-1 rounded-lg text-sm font-medium transition ${active === item.label
-                                        ? "bg-black text-white shadow"
-                                        : "bg-gray-100 hover:bg-gray-200"
+                                    ? "bg-black text-white shadow"
+                                    : "bg-gray-100 hover:bg-gray-200"
                                     }`}
                             >
                                 {item.label}
