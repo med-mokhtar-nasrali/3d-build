@@ -39,7 +39,7 @@ const floorPlanImages = [
     "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773537/IMG_8300_jsyi0x.jpg",
 ];
 
-export default function Plan() {
+export default function Planb() {
     
     const navigate = useNavigate();
     const [selectedHouse, setSelectedHouse] = useState(null);
@@ -235,7 +235,7 @@ export default function Plan() {
             </section>
 {/* Houses Section */}
 <section className="relative py-16 border-b border-gray-300">
-  <Title> CHOOSE YOUR HOUSE </Title>
+  <Title>CHOOSE YOUR HOUSE</Title>
 
   {/* Background image */}
   <div
@@ -250,7 +250,7 @@ export default function Plan() {
     {/* Buttons container */}
     <div className="absolute top-4 left-0 right-0 flex overflow-x-auto space-x-4 px-4 py-2 flex-nowrap scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
       {houses
-        .filter((house) => house.type === "a") // ✅ only show type "a"
+        .filter((house) => house.type === "b") // ✅ only show type "a"
         .map((house) => (
         <button
           key={house.id}

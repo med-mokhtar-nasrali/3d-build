@@ -3,14 +3,7 @@ import Navbar from "./Navbar";
 
 import { Link } from 'react-router-dom';
 
-const videos = [
-    { src: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754772189/1_v1zsfc.mp4", reverse: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754772170/RecorderClip_Reverse1_mduytz.mp4", title: "House 38A" },
-    { src: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754772183/2_pnvwp9.mp4", reverse: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754771812/RecorderClip_Reverse3_vvupud.mp4", title: "House 38B" },
-    { src: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754771772/3_vyidmk.mp4", reverse: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754771893/RecorderClip_Reverse4_zbrbui.mp4", title: "House 38C" },
-    { src: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754771811/4_ukq77s.mp4", reverse: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754772115/RecorderClip_Reverse2_mkvjtq.mp4", title: "House 38D" },
-    { src: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754833809/LateTransition_qmwchy.mp4", reverse: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754771890/RecorderClip_262_vt4k2r.mp4", svgLink: "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754778822/Artboard_1_o8pxzr.svg", title: "House 38E" },
-    { src: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754771941/RecorderClip_260_kgoxot.mp4", reverse: "https://res.cloudinary.com/dzbmwlwra/video/upload/v1754771890/RecorderClip_262_vt4k2r.mp4", title: "House 38F" },
-];
+import { videos } from "./videosList";
 
 export default function FullscreenVideoPlayer() {
     const [current, setCurrent] = React.useState(0);
