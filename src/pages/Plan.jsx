@@ -238,12 +238,16 @@ export default function Plan() {
   <Title> CHOOSE YOUR HOUSE </Title>
 
   {/* Background image */}
-  <div
-    className="relative w-full h-[800px] bg-cover bg-center rounded-lg overflow-hidden max-w-7xl mx-auto"
-    style={{
-      backgroundImage: `url(${currentImage || "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773542/IMG_82933_lzkcpn.jpg"})`,
-    }}
-  >
+<div
+  className="relative w-full h-[800px] bg-contain bg-center bg-no-repeat rounded-lg overflow-hidden max-w-7xl mx-auto"
+  style={{
+    backgroundImage: `url(${
+      currentImage ||
+      "https://res.cloudinary.com/dzbmwlwra/image/upload/v1762360930/49ba186a-621c-4825-859e-ff097bec92c5_rdji7t.jpg"
+    })`,
+  }}
+>
+
     {/* Dark overlay */}
     <div className="absolute inset-0 bg-black/20"></div>
 

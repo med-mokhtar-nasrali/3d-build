@@ -8,7 +8,7 @@ export default function Navbar({ playVideo }) {
 
   const navItems = [
     { label: "Master Plan", path: "/" },
-    { label: "Apartment", path: "/" },
+    
     { label: "Floor plan", path: "/plan" },
   ];
 
@@ -36,7 +36,7 @@ export default function Navbar({ playVideo }) {
           href="/"
           className="font-bold text-lg text-black tracking-tight whitespace-nowrap"
         >
-          Eagle Vision
+          bngimmo
         </a>
 
         <div className="flex items-center gap-2 text-sm text-gray-700 relative">
