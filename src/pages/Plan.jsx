@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import houses from "../data/houses.json"; // Add your JSON "DB" here
+import houses from "../data/houses.json"; // Your JSON "DB"
 import HouseCommentForm from './HouseCommentForm'; // adjust path
 import { houseImages } from "../data/houseImages";
 
 const roomImages = [
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773545/4_bk3bvu.jpg",
     "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773545/1_wus98m.jpg",
+    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773545/4_bk3bvu.jpg",
     "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773541/5_rxamyg.jpg",
     "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773544/3_mtdj5s.jpg",
 ];
@@ -20,16 +20,9 @@ const galleryImages = [
     "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773537/IMG_8300_jsyi0x.jpg",
     "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773537/IMG_8299_bhow8o.jpg",
     "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773537/IMG_8296_j22uz6.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773537/IMG_8299_bhow8o.jpg",
     "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773536/IMG_8298_theljb.jpg",
     "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773535/IMG_8302_ggtg15.jpg",
     "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773535/IMG_8301_hpjjbs.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773534/IMG_8305_hrnzcx.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773534/IMG_8307_rgyqeu.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773533/IMG_8308_lsa1ue.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773533/IMG_8309_eywbcj.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773533/IMG_8310_tzs30c.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773533/IMG_8311_wqqyvc.jpg",
 ];
 
 const floorPlanImages = [
@@ -40,9 +33,7 @@ const floorPlanImages = [
 ];
 
 export default function Plan() {
-    
     const navigate = useNavigate();
-    const [selectedHouse, setSelectedHouse] = useState(null);
     const [hoveredHouseId, setHoveredHouseId] = useState(null);
     const [roomIndex, setRoomIndex] = useState(0);
     const [galleryIndex, setGalleryIndex] = useState(0);
@@ -62,16 +53,13 @@ export default function Plan() {
             setFloorIndex((prev) => (prev + increment + floorPlanImages.length) % floorPlanImages.length);
         }
     };
-        const handleHouseClick = (houseId) => {
-  const house = houses.find(h => h.id === houseId);
-  if (house && house.state === "actif") {
-    console.log("Clicked house:", houseId);
-    navigate(`/house/${houseId}`); // WITH HashRouter this is fine
-  }
-};
 
-
-
+    const handleHouseClick = (houseId) => {
+        const house = houses.find(h => h.id === houseId);
+        if (house && house.state === "actif") {
+            navigate(`/house/${houseId}`);
+        }
+    };
 
     const Title = ({ children }) => (
         <div className="text-center max-w-5xl mx-auto px-4 mb-16">
@@ -82,10 +70,36 @@ export default function Plan() {
         </div>
     );
 
+    const Section = ({ title, images, index, setIndex }) => (
+        <section className="relative w-full min-h-[85vh] border-b flex items-center justify-center">
+            <div
+                className="absolute inset-0 bg-center bg-no-repeat bg-cover"
+                style={{ backgroundImage: `url(${images[index]})` }}
+            ></div>
+
+            <h2 className="absolute top-6 w-full text-center text-4xl sm:text-5xl font-extrabold text-white z-10 select-none">
+                {title}
+            </h2>
+
+            <button
+                onClick={() => setIndex((prev) => (prev - 1 + images.length) % images.length)}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl font-bold bg-black/30 rounded-full p-3 hover:bg-black transition z-10"
+            >
+                &#8592;
+            </button>
+
+            <button
+                onClick={() => setIndex((prev) => (prev + 1) % images.length)}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl font-bold bg-black/30 rounded-full p-3 hover:bg-black transition z-10"
+            >
+                &#8594;
+            </button>
+        </section>
+    );
+
     return (
-        <div className="bg-gray-50 min-h-screen text-gray-900 font-sans">
-            
-            
+        <div className="min-h-screen text-bleu-900 font-sans">
+
             {/* Property Planning Section */}
             <section className="py-24 border-b border-gray-300">
                 <Title>PROPERTY<br />PLANNING</Title>
@@ -119,7 +133,7 @@ export default function Plan() {
                         </div>
                     </div>
 
-                    {/* Image Box with static image */}
+                    {/* Image Box */}
                     <div className="snap-center flex-shrink-0 max-w-md flex flex-col items-center">
                         <img
                             src="https://res.cloudinary.com/dzbmwlwra/image/upload/v1754778241/floor-plan_jvww4l.png"
@@ -143,119 +157,23 @@ export default function Plan() {
                 </div>
             </section>
 
+            {/* Room Tour, Floor Plan, Gallery Sections */}
+            <Section title="ROOM TOUR" images={roomImages} index={roomIndex} setIndex={setRoomIndex} />
+            <br />
+            <Section title="FLOOR PLAN" images={floorPlanImages} index={floorIndex} setIndex={setFloorIndex} />
+            <br />
+            <Section title="GALLERY" images={galleryImages} index={galleryIndex} setIndex={setGalleryIndex} />
+            <br />
 
-            {/* Room Tour Section */}
-            <section className="py-24 border-b border-gray-300">
-                <Title>ROOM<br />TOUR</Title>
+            {/* Houses Section */}
+<section className="relative w-full min-h-[85vh] flex flex-col items-center justify-start gap-8">
+  <Title>CHOOSE YOUR HOUSE</Title>
 
-                <div className="flex flex-col items-center gap-8 max-w-4xl mx-auto px-4">
-                    <div
-                        className="w-full rounded-3xl overflow-hidden shadow-lg cursor-pointer"
-                        onClick={() => setPopupSrc(roomImages[roomIndex])}
-                    >
-                        <img src={roomImages[roomIndex]} alt="Room Tour" className="w-full object-cover" />
-                    </div>
-
-                    <div className="flex gap-8">
-                        <button
-                            onClick={() => updateCarousel("room", -1)}
-                            className="px-6 py-3 border border-black rounded-full hover:bg-black hover:text-white transition font-semibold"
-                        >
-                            Previous
-                        </button>
-                        <button
-                            onClick={() => updateCarousel("room", 1)}
-                            className="px-6 py-3 border border-black rounded-full hover:bg-black hover:text-white transition font-semibold"
-                        >
-                            Next
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            {/* Floor Plan Section */}
-            <section className="py-24 border-b border-gray-300">
-                <Title>FLOOR<br />PLAN</Title>
-                <div className="flex flex-col items-center gap-8 max-w-4xl mx-auto px-4">
-                    <div
-                        className="w-full rounded-3xl overflow-hidden shadow-lg cursor-pointer"
-                        onClick={() => setPopupSrc(floorPlanImages[floorIndex])}
-                    >
-                        <img
-                            src={floorPlanImages[floorIndex]}
-                            alt="Floor Plan"
-                            className="w-full object-cover"
-                        />
-                    </div>
-
-                    <div className="flex gap-8">
-                        <button
-                            onClick={() => updateCarousel("floor", -1)}
-                            className="px-6 py-3 border border-black rounded-full hover:bg-black hover:text-white transition font-semibold"
-                        >
-                            Previous
-                        </button>
-                        <button
-                            onClick={() => updateCarousel("floor", 1)}
-                            className="px-6 py-3 border border-black rounded-full hover:bg-black hover:text-white transition font-semibold"
-                        >
-                            Next
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            {/* Gallery Section */}
-            <section className="py-24 border-b border-gray-300">
-                <Title>GALLERY</Title>
-
-                <div className="flex flex-col items-center gap-8 max-w-4xl mx-auto px-4">
-                    <div
-                        className="w-full rounded-3xl overflow-hidden shadow-lg cursor-pointer"
-                        onClick={() => setPopupSrc(galleryImages[galleryIndex])}
-                    >
-                        <img src={galleryImages[galleryIndex]} alt="Gallery" className="w-full object-cover" />
-                    </div>
-
-                    <div className="flex gap-8">
-                        <button
-                            onClick={() => updateCarousel("gallery", -1)}
-                            className="px-6 py-3 border border-black rounded-full hover:bg-black hover:text-white transition font-semibold"
-                        >
-                            Previous
-                        </button>
-                        <button
-                            onClick={() => updateCarousel("gallery", 1)}
-                            className="px-6 py-3 border border-black rounded-full hover:bg-black hover:text-white transition font-semibold"
-                        >
-                            Next
-                        </button>
-                    </div>
-                </div>
-            </section>
-{/* Houses Section */}
-<section className="relative py-16 border-b border-gray-300">
-  <Title> CHOOSE YOUR HOUSE </Title>
-
-  {/* Background image */}
-<div
-  className="relative w-full h-[800px] bg-contain bg-center bg-no-repeat rounded-lg overflow-hidden max-w-7xl mx-auto"
-  style={{
-    backgroundImage: `url(${
-      currentImage ||
-      "https://res.cloudinary.com/dzbmwlwra/image/upload/v1762360930/49ba186a-621c-4825-859e-ff097bec92c5_rdji7t.jpg"
-    })`,
-  }}
->
-
-    {/* Dark overlay */}
-    <div className="absolute inset-0 bg-black/20"></div>
-
-    {/* Buttons container */}
-    <div className="absolute top-4 left-0 right-0 flex overflow-x-auto space-x-4 px-4 py-2 flex-nowrap scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
-      {houses
-        .filter((house) => house.type === "a") // ✅ only show type "a"
-        .map((house) => (
+  {/* Buttons container on top */}
+  <div className="flex overflow-x-auto space-x-4 px-4 py-2 flex-nowrap scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 w-full max-w-7xl mb-4">
+    {houses
+      .filter((house) => house.type === "a")
+      .map((house) => (
         <button
           key={house.id}
           onClick={() => handleHouseClick(house.id)}
@@ -270,15 +188,16 @@ export default function Plan() {
           {house.number} {house.state !== "actif" ? "(Sold)" : ""}
         </button>
       ))}
-    </div>
   </div>
-  <br /><br />
+
+  {/* Background image */}
+  <div
+    className="relative w-full flex-1 bg-center bg-no-repeat bg-cover rounded-lg overflow-hidden max-w-7xl"
+    style={{ backgroundImage: `url(${currentImage || "https://res.cloudinary.com/dzbmwlwra/image/upload/v1762360930/49ba186a-621c-4825-859e-ff097bec92c5_rdji7t.jpg"})` }}
+  ></div>
+  
 </section>
-
-
-
-
-
+<br /><br />    
             {/* Popup */}
             {popupSrc && (
                 <div
@@ -302,27 +221,26 @@ export default function Plan() {
             )}
 
             {/* Bottom Navbar */}
-<div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-white border border-gray-300 rounded-full shadow-lg px-4 py-2 flex gap-3 z-50 max-w-md justify-center text-sm">
-  <button
-    className="bg-black text-white rounded-full px-3 py-1.5 font-medium hover:bg-gray-900 transition"
-    onClick={() => alert("Request a callback")}
-  >
-    CALL BACK
-  </button>
-  <button
-    className="border border-black rounded-full px-3 py-1.5 font-medium hover:bg-black hover:text-white transition"
-    onClick={() => alert("Downloading PDF")}
-  >
-    PDF DOWNLOAD
-  </button>
-  <button
-    className="border border-black rounded-full px-3 py-1.5 font-medium hover:bg-black hover:text-white transition"
-    onClick={() => window.history.back()}
-  >
-    GO BACK
-  </button>
-</div>
-
+            <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-white border border-gray-300 rounded-full shadow-lg px-4 py-2 flex gap-3 z-50 max-w-md justify-center text-sm">
+                <button
+                    className="bg-black text-white rounded-full px-3 py-1.5 font-medium hover:bg-gray-900 transition"
+                    onClick={() => alert("Request a callback")}
+                >
+                    CALL BACK
+                </button>
+                <button
+                    className="border border-black rounded-full px-3 py-1.5 font-medium hover:bg-black hover:text-white transition"
+                    onClick={() => alert("Downloading PDF")}
+                >
+                    PDF DOWNLOAD
+                </button>
+                <button
+                    className="border border-black rounded-full px-3 py-1.5 font-medium hover:bg-black hover:text-white transition"
+                    onClick={() => window.history.back()}
+                >
+                    GO BACK
+                </button>
+            </div>
         </div>
     );
 }
