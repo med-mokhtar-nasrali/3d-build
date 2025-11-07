@@ -15,6 +15,8 @@ import VideoPlayer from './components/VideoPlayer';
 import Loader from './components/Loader';
 import { videos } from './components/videosList';
 import HouseCommentForm from './pages/HouseCommentForm';
+import ChatBot from './components/ChatBot';
+import { ChatProvider } from './context/ChatContext';
 
 
 function AppContent() {
@@ -94,6 +96,7 @@ function AppContent() {
         </Routes>
       </main>
       {!hideLayout && <Footer />}
+      {!hideLayout && <ChatBot />}
     </div>
   );
 }
@@ -101,7 +104,9 @@ function AppContent() {
 function App() {
   return (
     <Router>
-      <AppContent />
+      <ChatProvider>
+        <AppContent />
+      </ChatProvider>
     </Router>
   );
 }

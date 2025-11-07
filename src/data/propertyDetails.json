@@ -1,0 +1,58 @@
+{
+  "propertyTypes": {
+    "a": {
+      "name": "Type A - Standard Residential",
+      "description": "Perfect for families and individuals looking for comfortable living spaces",
+      "features": [
+        "Modern architectural design",
+        "Open floor plans",
+        "Energy-efficient systems",
+        "Quality finishes throughout",
+        "Ample natural lighting"
+      ],
+      "idealFor": "First-time buyers, small families, young professionals"
+    },
+    "b": {
+      "name": "Type B - Premium Units",
+      "description": "Enhanced features and larger spaces for those seeking luxury",
+      "features": [
+        "Spacious layouts with premium finishes",
+        "High-end kitchen appliances",
+        "Enhanced bathroom fixtures",
+        "Additional storage space",
+        "Premium flooring options",
+        "Upgraded HVAC systems"
+      ],
+      "idealFor": "Growing families, professionals, luxury seekers"
+    }
+  },
+  "buildingAmenities": [
+    "24/7 Security",
+    "Covered parking",
+    "Modern elevator systems",
+    "Green spaces and landscaping",
+    "Energy-efficient building design",
+    "Close to amenities and transportation"
+  ],
+  "contactInfo": {
+    "phone": "+1 (555) 123-4567",
+    "email": "info@bngarchitecture.com",
+    "viewingSchedule": "Monday to Saturday, 9 AM - 6 PM",
+    "responseTime": "Within 24 hours"
+  },
+  "financingOptions": [
+    "Traditional mortgage financing",
+    "Pre-approval assistance",
+    "Flexible payment plans available",
+    "First-time buyer programs"
+  ],
+  "locationBenefits": [
+    "Prime location in growing area",
+    "Close to schools and shopping",
+    "Easy access to major highways",
+    "Nearby parks and recreation",
+    "Public transportation access"
+  ]
+}
+
+
