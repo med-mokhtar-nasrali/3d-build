@@ -1,28 +1,67 @@
-import React, { useEffect, useState } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Location from './components/Location';
-import Technology from './components/Technology';
-import Contact from './components/Contact';
-import Projects from './components/Projects';
-import Footer from './components/Footer';
-import Plan from './pages/Plan';
-import Planb from './pages/Planb';
+import React, { useEffect, useRef, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 
-import AdminPage from "./pages/AdminPage"; 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import Navbar from "./components/Navbar";
+import Location from "./components/Location";
+import Technology from "./components/Technology";
+import Contact from "./components/Contact";
+import Projects from "./components/Projects";
+import Footer from "./components/Footer";
+import Plan from "./pages/Plan";
+import Planb from "./pages/Planb";
+
+import AdminPage from "./pages/AdminPage";
 import Dashboard from "./pages/Dashboard";
-import VideoPlayer from './components/VideoPlayer';
-import Loader from './components/Loader';
-import { videos } from './components/videosList';
-import HouseCommentForm from './pages/HouseCommentForm';
-import ChatBot from './components/ChatBot';
-import { ChatProvider } from './context/ChatContext';
+import VideoPlayer from "./components/VideoPlayer";
+import Loader from "./components/Loader";
+import { videos } from "./components/videosList";
+import HouseCommentForm from "./pages/HouseCommentForm";
+import ChatBot from "./components/ChatBot";
+import { ChatProvider } from "./context/ChatContext";
+import NotFound from "./pages/NotFound";
 
+/* --- Global simple sound helper (no extra deps) --- */
+function GlobalSounds() {
+  const okRef = useRef(null);
+  const errRef = useRef(null);
+
+  useEffect(() => {
+    // Expose a simple global sound API
+    window.playUiSound = (type = "ok") => {
+      const el = type === "error" ? errRef.current : okRef.current;
+      if (!el) return;
+      try {
+        el.currentTime = 0;
+        el.play();
+      } catch { }
+    };
+    return () => {
+      if (window.playUiSound) delete window.playUiSound;
+    };
+  }, []);
+
+  return (
+    <>
+      {/* Put your mp3 files in public/sounds/ or adjust paths */}
+      <audio ref={okRef} preload="auto" src="/sounds/success.mp3" />
+      <audio ref={errRef} preload="auto" src="/sounds/error.mp3" />
+    </>
+  );
+}
 
 function AppContent() {
   const location = useLocation();
-  const hideLayout = location.pathname === "/admin" || location.pathname === "/dashboard"   ;
-
+  const hideLayout =
+    location.pathname === "/admin" || location.pathname === "/dashboard";
 
   const [isReady, setIsReady] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -61,8 +100,31 @@ function AppContent() {
   if (!isReady && !hideLayout) return <Loader progress={progress} />;
 
   return (
-    <div className={hideLayout ? "min-h-screen bg-white flex flex-col items-center justify-center" : "bg-gray-100 min-h-screen flex flex-col"}>
+    <div
+      className={
+        hideLayout
+          ? "min-h-screen bg-white flex flex-col items-center justify-center"
+          : "bg-gray-100 min-h-screen flex flex-col"
+      }
+    >
       {!hideLayout && <Navbar />}
+
+      {/* Toasts available on every route */}
+      <ToastContainer
+        position="top-center"
+        autoClose={2800}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
+      {/* Global sounds  */}
+      <GlobalSounds />
+
       <main className="flex-grow w-full">
         <Routes>
           <Route
@@ -80,11 +142,9 @@ function AppContent() {
           <Route path="/plan" element={<Plan />} />
           <Route path="/planb" element={<Planb />} />
           <Route path="/admin" element={<AdminPage />} />
-          
           <Route
             path="/dashboard"
             element={
-              // Only allow access if user is logged in
               location.state?.email ? (
                 <Dashboard email={location.state.email} />
               ) : (
@@ -93,6 +153,7 @@ function AppContent() {
             }
           />
           <Route path="/house/:id" element={<HouseCommentForm />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       {!hideLayout && <Footer />}

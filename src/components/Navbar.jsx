@@ -8,7 +8,7 @@ export default function Navbar({ playVideo }) {
 
   const navItems = [
     { label: "Master Plan", path: "/" },
-    
+
     { label: "Floor plan", path: "/plan" },
   ];
 
@@ -36,7 +36,7 @@ export default function Navbar({ playVideo }) {
           href="/"
           className="font-bold text-lg text-black tracking-tight whitespace-nowrap"
         >
-          bngimmo
+          BNGIMMO
         </a>
 
         <div className="flex items-center gap-2 text-sm text-gray-700 relative">
@@ -46,18 +46,16 @@ export default function Navbar({ playVideo }) {
                 <Link
                   to={item.path}
                   onClick={(e) => handleClick(item, e)}
-                  className={`flex items-center gap-1 px-3 py-1 rounded-lg text-sm font-medium transition ${
-                    active === item.label
+                  className={`flex items-center gap-1 px-3 py-1 rounded-lg text-sm font-medium transition ${active === item.label
                       ? "bg-black text-white shadow"
                       : "bg-gray-100 hover:bg-gray-200"
-                  }`}
+                    }`}
                 >
                   {item.label}
                   {item.label === "Floor plan" && (
                     <FaChevronDown
-                      className={`text-xs transition-transform ${
-                        showDropdown ? "rotate-180" : "rotate-0"
-                      }`}
+                      className={`text-xs transition-transform ${showDropdown ? "rotate-180" : "rotate-0"
+                        }`}
                     />
                   )}
                 </Link>

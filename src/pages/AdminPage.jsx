@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import users from "../data/users.json"; // Static JSON "DB"
 
 const AdminPage = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPwd, setShowPwd] = useState(false);
   const [error, setError] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const user = users.find(
-      (u) => u.email === email && u.password === password
-    );
+    const user = users.find((u) => u.email === email && u.password === password);
 
     if (user) {
       setLoggedIn(true);
@@ -27,64 +27,90 @@ const AdminPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white shadow-2xl rounded-lg w-full max-w-md p-10">
-        {/* Branding / Logo */}
-        <div className="flex flex-col items-center mb-6">
-          <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 flex items-center justify-center px-4 py-10">
+      {/* Card */}
+      <div className="w-full max-w-md rounded-3xl border border-gray-200 bg-white/95 shadow-xl backdrop-blur p-8 sm:p-10">
+        {/* Branding / Title */}
+        <div className="text-center mb-8">
+          <div className="mx-auto w-16 h-16 rounded-full bg-black text-white flex items-center justify-center text-xl font-extrabold tracking-widest">
             BA
           </div>
-          <h1 className="text-2xl font-bold mt-4 text-gray-800">
+          <h1 className="mt-5 text-2xl sm:text-3xl font-extrabold uppercase tracking-[0.25em]">
             Architecture Admin
           </h1>
-          <p className="text-gray-500 mt-1 text-center">
+          <span className="mt-3 block h-[3px] w-24 bg-black mx-auto rounded-full" />
+          <p className="mt-4 text-gray-600">
             Sign in to access your projects dashboard
           </p>
         </div>
 
-        {/* Login Form */}
-        <form onSubmit={handleLogin} className="space-y-5">
-          <div>
-            <label className="block text-gray-700 mb-1" htmlFor="email">
+        {/* Form */}
+        <form onSubmit={handleLogin} className="space-y-7">
+          {/* Email */}
+          <div className="group relative">
+            <label htmlFor="email" className="block text-sm font-semibold mb-2">
               Email
             </label>
             <input
-              type="email"
               id="email"
+              type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@architecture.com"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="peer w-full bg-transparent px-1 py-2 text-base border-b border-gray-300 focus:outline-none focus:border-black transition-colors"
             />
+            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-black transition-all duration-300 peer-focus:w-full" />
           </div>
 
-          <div>
-            <label className="block text-gray-700 mb-1" htmlFor="password">
+          {/* Password */}
+          <div className="group relative">
+            <label htmlFor="password" className="block text-sm font-semibold mb-2">
               Password
             </label>
-            <input
-              type="password"
-              id="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="********"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <div className="flex items-center gap-2 border-b border-gray-300 focus-within:border-black transition-colors">
+              <input
+                id="password"
+                type={showPwd ? "text" : "password"}
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="********"
+                className="peer w-full bg-transparent px-1 py-2 text-base focus:outline-none"
+                aria-invalid={!!error}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPwd((s) => !s)}
+                className="text-sm font-medium text-gray-600 hover:text-black transition-colors px-2 py-1 rounded-full"
+                aria-label={showPwd ? "Hide password" : "Show password"}
+              >
+                {showPwd ? "Hide" : "Show"}
+              </button>
+            </div>
+            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-black transition-all duration-300 peer-focus:w-full" />
           </div>
 
-          
-
+          {/* Error */}
           {error && (
-            <p className="text-red-500 text-sm text-center">{error}</p>
+            <p className="text-red-600 text-sm text-center -mt-2">{error}</p>
           )}
 
+          {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+            className="w-full rounded-full bg-black text-white py-3 font-semibold tracking-wide hover:bg-gray-900 active:scale-[0.99] transition"
           >
             Sign In
+          </button>
+
+          {/* Go Back Button */}
+          <button
+            type="button"
+            onClick={() => navigate("/")}
+            className="w-full mt-3 rounded-full border-2 border-black text-black py-3 font-semibold tracking-wide hover:bg-black hover:text-white active:scale-[0.99] transition"
+          >
+            ← Go Back
           </button>
         </form>
 
