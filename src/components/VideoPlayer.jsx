@@ -11,7 +11,7 @@ export default function FullscreenVideoPlayer() {
     const v0 = React.useRef(null);
     const v1 = React.useRef(null);
 
-    const INTERIOR_VIDEO = "https://res.cloudinary.com/dzbmwlwra/video/upload/v1762343546/1105_pyem6p.mp4";
+    const INTERIOR_VIDEO = "https://res.cloudinary.com/dzbmwlwra/video/upload/f_auto,q_auto,vc_auto/v1762343546/1105_pyem6p.mp4";
 
     React.useEffect(() => {
         const el = v0.current;

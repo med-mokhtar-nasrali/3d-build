@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import housesData from "../data/houses.json";
 import commentsData from "../data/comments.json";
 
-// Simulated in-memory DB
+
 let houses = [...housesData];
 let comments = [...commentsData];
 

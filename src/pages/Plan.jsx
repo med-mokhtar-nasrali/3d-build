@@ -3,34 +3,9 @@ import { useNavigate } from "react-router-dom";
 import houses from "../data/houses.json"; // Your JSON "DB"
 import HouseCommentForm from "./HouseCommentForm"; // path unchanged
 import { houseImages } from "../data/houseImages";
-
-const roomImages = [
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773545/1_wus98m.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773545/4_bk3bvu.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773541/5_rxamyg.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773544/3_mtdj5s.jpg",
-];
-
-const galleryImages = [
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773542/IMG_82933_lzkcpn.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773542/IMG_8294_wu2emy.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773537/IMG_8295_cumyls.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773537/IMG_83000_jgd2xr.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773537/IMG_8297_h1mpgd.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773537/IMG_8300_jsyi0x.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773537/IMG_8299_bhow8o.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773537/IMG_8296_j22uz6.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773536/IMG_8298_theljb.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773535/IMG_8302_ggtg15.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773535/IMG_8301_hpjjbs.jpg",
-];
-
-const floorPlanImages = [
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773534/IMG_8305_hrnzcx.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773537/IMG_83000_jgd2xr.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773537/IMG_8296_j22uz6.jpg",
-    "https://res.cloudinary.com/dzbmwlwra/image/upload/v1754773537/IMG_8300_jsyi0x.jpg",
-];
+import { roomImages } from "../data/roomImages";
+import { galleryImages } from "../data/galleryImages";
+import { floorPlanImages } from "../data/floorPlanImages";
 
 export default function Plan() {
     const navigate = useNavigate();
@@ -40,13 +15,13 @@ export default function Plan() {
     const [floorIndex, setFloorIndex] = useState(0);
     const [popupSrc, setPopupSrc] = useState(null);
 
-    // Slider state for “Choose Your House”
+
     const activeHouses = useMemo(() => houses.filter((h) => h.type === "a"), []);
     const [currentIdx, setCurrentIdx] = useState(
         Math.max(0, activeHouses.findIndex((h) => h.state === "actif"))
     );
 
-    // Keyboard nav for house slider
+
     useEffect(() => {
         const onKey = (e) => {
             if (e.key === "ArrowRight") nextHouse();
@@ -67,7 +42,7 @@ export default function Plan() {
 
     const currentImage =
         houseImages.find((img) => img.id === currentActiveId)?.src ??
-        "https://res.cloudinary.com/dzbmwlwra/image/upload/v1762360930/49ba186a-621c-4825-859e-ff097bec92c5_rdji7t.jpg";
+        "https://res.cloudinary.com/dzbmwlwra/image/upload/f_auto,q_auto/v1762360930/49ba186a-621c-4825-859e-ff097bec92c5_rdji7t.jpg";
 
     const updateCarousel = (type, increment) => {
         if (type === "room") {
@@ -93,7 +68,6 @@ export default function Plan() {
         </div>
     );
 
-    // Click-to-open modal for Section backgrounds
     const Section = ({ title, images, index, setIndex }) => (
         <section className="relative w-full min-h-[70vh] md:min-h-[80vh] lg:min-h-[85vh] border-b flex items-center justify-center">
             {/* Clickable background */}
@@ -131,53 +105,40 @@ export default function Plan() {
     return (
         <div className="min-h-screen text-gray-900 bg-gradient-to-b from-white to-gray-50">
             {/* PROPERTY PLANNING — wider & horizontal cards */}
-            <section className="py-20 sm:py-24 border-b border-gray-200">
+            <section className="py-16 sm:py-24 border-b border-gray-200 bg-gradient-to-b from-white via-gray-50 to-white">
                 <Title>
                     PROPERTY
                     <br />
                     PLANNING
                 </Title>
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6">
-                    {/* 3-column horizontal layout (no scroll), responsive stack on mobile */}
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-                        {/* Info Card */}
-                        <div className="bg-white/95 border border-gray-200 rounded-3xl shadow-lg p-8 sm:p-10 flex flex-col justify-between backdrop-blur">
+                <div className="w-full max-w-6xl mx-auto px-4 sm:px-8">
+                    <div className="flex flex-col lg:flex-row gap-6 items-stretch">
+
+                        {/* Left Card */}
+                        <div className="lg:w-[240px] bg-white/95 border border-gray-100 rounded-3xl shadow-xl p-6 flex flex-col justify-between text-center backdrop-blur-lg transition-all hover:shadow-2xl hover:-translate-y-1">
                             <div>
-                                <h2 className="text-2xl sm:text-3xl font-bold mb-6">Unit 1R</h2>
-                                <div className="grid grid-cols-1 gap-2 text-base sm:text-lg">
-                                    <p>
-                                        <strong>Area:</strong> 546.27 sqft
-                                    </p>
-                                    <p>
-                                        <strong>Price:</strong> $1,020,400
-                                    </p>
-                                    <div className="mt-4 space-y-2 sm:space-y-3">
-                                        <p>🛏️ 1 Bed</p>
-                                        <p>🛁 1 Bath</p>
-                                        <p>📐 Type: 1BD, Type A, W.B</p>
+                                <h2 className="text-2xl font-extrabold mb-2 text-gray-900 tracking-wide">Unit 1R</h2>
+                                <div className="text-base space-y-1 text-gray-700">
+                                    <p><strong>Area:</strong> 546.27 sqft</p>
+                                    <p><strong>Price:</strong> <span className="text-green-700 font-bold">$1,020,400</span></p>
+                                    <div className="pt-2 flex flex-col gap-1 text-gray-600">
+                                        <span className="inline-flex items-center gap-1"><span className="text-lg">🛏️</span> 1 Bed</span>
+                                        <span className="inline-flex items-center gap-1"><span className="text-lg">🛁</span> 1 Bath</span>
+                                        <span className="inline-flex items-center gap-1"><span className="text-lg">📐</span> 1BD, Type A, W.B</span>
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="mt-8 grid grid-cols-2 gap-3">
-                                <button className="px-4 py-2.5 rounded-full border-2 border-black font-semibold hover:bg-black hover:text-white transition">
-                                    PDF
-                                </button>
-                                <button className="px-4 py-2.5 rounded-full border-2 border-black font-semibold hover:bg-black hover:text-white transition">
-                                    COMPARE
-                                </button>
-                                <button className="px-4 py-2.5 rounded-full border-2 border-black font-semibold hover:bg-black hover:text-white transition col-span-2">
-                                    ON 3D
-                                </button>
-                                <button className="px-4 py-2.5 rounded-full bg-black text-white font-semibold hover:bg-gray-900 transition col-span-2">
-                                    CALL BACK
-                                </button>
+                            <div className="mt-6 flex flex-col gap-2">
+                                <button className="px-3 py-1.5 rounded-full border-2 border-black font-semibold hover:bg-black hover:text-white transition text-sm">PDF</button>
+                                <button className="px-3 py-1.5 rounded-full border-2 border-black font-semibold hover:bg-black hover:text-white transition text-sm">COMPARE</button>
+                                <button className="px-3 py-1.5 rounded-full border-2 border-black font-semibold hover:bg-black hover:text-white transition text-sm">ON 3D</button>
+                                <button className="px-3 py-1.5 rounded-full bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold hover:from-green-700 hover:to-green-800 transition text-sm shadow">CALL BACK</button>
                             </div>
                         </div>
 
-                        {/* Floor Plan Image  */}
-                        <div className="rounded-3xl overflow-hidden shadow-xl border border-gray-200 bg-white/60 backdrop-blur flex flex-col">
+                        {/* Center Floor Plan */}
+                        <div className="flex-1 rounded-3xl overflow-hidden shadow-2xl border border-gray-100 bg-white/80 backdrop-blur-lg flex flex-col transform hover:scale-[1.025] transition-transform duration-300">
                             <div
                                 className="relative w-full aspect-[4/3] bg-center bg-cover cursor-pointer group"
                                 style={{
@@ -191,27 +152,38 @@ export default function Plan() {
                                 }
                                 title="Click to view"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                                <span className="absolute bottom-3 right-3 text-xs font-semibold px-2 py-1 rounded-full bg-black text-white">
-                                    VIEW
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <span className="absolute bottom-4 right-4 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full bg-black/80 text-white shadow-lg tracking-wide">
+                                    VIEW FLOOR PLAN
                                 </span>
                             </div>
                             <div className="p-6 text-center text-gray-700 space-y-1">
-                                <p className="font-semibold">Floor Plan</p>
-                                <p>Total area: 546.27 sqft</p>
-                                <p>Living area: 491.13 sqft</p>
+                                <p className="text-2xl font-semibold text-gray-900">Floor Plan Overview</p>
+                                <div className="flex justify-center gap-6 mt-2">
+                                    <span className="bg-gray-100 rounded-full px-4 py-1 text-sm font-medium">
+                                        Total area: <strong>546.27 sqft</strong>
+                                    </span>
+                                    <span className="bg-gray-100 rounded-full px-4 py-1 text-sm font-medium">
+                                        Living area: <strong>491.13 sqft</strong>
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
-                        {/* Interior Highlights */}
-                        <div className="bg-white/95 border border-gray-200 rounded-3xl shadow-lg p-8 sm:p-10 text-center backdrop-blur">
-                            <h2 className="text-2xl sm:text-3xl font-bold mb-6">Interior Highlights</h2>
-                            <ul className="space-y-3 text-base sm:text-lg">
-                                <li>High ceilings</li>
-                                <li>Smart lighting</li>
-                                <li>Luxury wood flooring</li>
-                            </ul>
+                        {/* Right Card */}
+                        <div className="lg:w-[240px] bg-white/95 border border-gray-100 rounded-3xl shadow-xl p-6 text-center backdrop-blur-lg flex flex-col justify-between transition-all hover:shadow-2xl hover:-translate-y-1">
+                            <div>
+                                <h2 className="text-2xl font-extrabold mb-2 text-gray-900 tracking-wide">Interior Highlights</h2>
+                                <ul className="space-y-2 text-base text-gray-700 mt-2">
+                                    <li className="flex items-center gap-2"><span className="text-lg">✨</span> High ceilings</li>
+                                    <li className="flex items-center gap-2"><span className="text-lg">💡</span> Smart lighting</li>
+                                    <li className="flex items-center gap-2"><span className="text-lg">🪵</span> Luxury wood flooring</li>
+                                    <li className="flex items-center gap-2"><span className="text-lg">🌇</span> Panoramic windows</li>
+                                </ul>
+                            </div>
+                            <div className="mt-4 text-gray-500 text-xs sm:text-sm italic">Designed for modern living</div>
                         </div>
+
                     </div>
                 </div>
             </section>
@@ -237,7 +209,7 @@ export default function Plan() {
                                 <button
                                     key={house.id}
                                     onClick={() => {
-                                        setCurrentIdx(i);        // keeps original order index
+                                        setCurrentIdx(i);
                                         handleHouseClick(house.id);
                                     }}
                                     onMouseEnter={() => setHoveredHouseId(house.id)}

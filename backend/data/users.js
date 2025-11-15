@@ -1,0 +1,4 @@
+export const users = [
+  { email: "admin@architecture.com", password: "admin123" },
+  { email: "manager@architecture.com", password: "manager123" }
+];
